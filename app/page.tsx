@@ -1,13 +1,10 @@
 'use client';
-
 import { useState } from 'react';
 import { useShopify } from '@shopify/shopify-app-remix/react'; // We'll install this later
-
 export default function Home() {
   const { session } = useShopify();
   const [optimizing, setOptimizing] = useState(false);
   const [status, setStatus] = useState('');
-
   const optimizeAll = async () => {
     if (!session) {
       setStatus('Connect your Shopify store first!');
@@ -15,8 +12,7 @@ export default function Home() {
     }
     setOptimizing(true);
     setStatus('Optimizing your products... This takes 2-5 minutes.');
-
-    try {
+  try {
       const response = await fetch('/api/optimize', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
